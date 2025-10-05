@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陈鱼落琰网址导航</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 雪花和爱心效果 */
+        .falling-element {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: snowfall linear infinite;
+            z-index: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 主容器 */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 10;
+            position: relative;
+        }
+        
+        /* 标题样式 */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+        
+        /* 按钮容器 */
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        /* 按钮样式 */
+        .glow-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #4B5563;
+            font-weight: 600;
+            font-size: 1.1rem;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .glow-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.6);
+        }
+        
+        .glow-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 按钮光晕效果 */
+        .glow-btn::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.7;
+            animation: glowing 20s linear infinite;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+        }
+        
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        /* 按钮图标 */
+        .btn-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* 点击时的雪花效果 */
+        .snow-dots {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.9;
+            animation: snow-dot-animation 1s forwards;
+        }
+        
+        @keyframes snow-dot-animation {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .glow-btn {
+                padding: 14px 18px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 雪花和爱心由JavaScript生成 -->
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="header">
+            <h1>💞陈鱼落琰网址导航💖</h1>
+            <p>陈🐟落琰,闭月羞🌸</p>
+        </div>
+        
+        <!-- 按钮容器 -->
+        <div class="buttons-container">
+            <a href="https://cn.bing.com" target="_blank" class="glow-btn">
+                <i class="fas fa-search btn-icon"></i> Bing搜索🔍
+            </a>
+            <a href="https://m.weibo.cn/p/100808559ca31ebb57e8bd7522a35c8b3060cd" target="_blank" class="glow-btn">
+                <i class="fas fa-star btn-icon"></i> 陈芷琰微博超话💖
+            </a>
+            <a href="https://weibo.com/u/5625765940" target="_blank" class="glow-btn">
+                <i class="fas fa-user btn-icon"></i> 陈芷琰微博主页💝
+            </a>
+            <a href="https://xhslink.com/m/7zSfc4oLQR1" target="_blank" class="glow-btn">
+                <i class="fab fa-reddit btn-icon"></i> 陈芷琰小红书主页💜
+            </a>
+            <a href="https://v.kuaishou.com/KUbjAGNb" target="_blank" class="glow-btn">
+                <i class="fas fa-bolt btn-icon"></i> 陈芷琰快手主页
+            </a>
+            <a href="https://v.douyin.com/NajID6AZ5m0/" target="_blank" class="glow-btn">
+                <i class="fab fa-tiktok btn-icon"></i> 陈芷琰抖音主页🩷
+            </a>
+            <a href="https://www.bestvideow.com/" target="_blank" class="glow-btn">
+                <i class="fas fa-download btn-icon"></i> 陈芷琰视频素材提取🔗
+            </a>
+            <a href="https://www.123684.com/s/71zTjv-hFURh" target="_blank" class="glow-btn">
+                <i class="fas fa-sync-alt btn-icon"></i> 检查软件更新🔄
+            </a>
+            <a href="http://czy2012.chuangzaoba.top/" target="_blank" class="glow-btn">
+                <i class="fas fa-external-link-alt btn-icon"></i> 进入网络服务中心🌐
+            </a>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>芷若初见,🈵琰是你© 2025</p>
+    </div>
+
+    <script>
+        // 创建雪花和爱心效果
+        function createFallingElements() {
+            const elementCount = 10;
+            const snowflakes = ['❄','☃'];
+            const hearts = ['💝', '💖'];
+            
+            for (let i = 0; i < elementCount; i++) {
+                const element = document.createElement('div');
+                element.classList.add('falling-element');
+                
+                // 随机选择雪花或爱心（80%雪花，20%爱心）
+                let symbol;
+                if (Math.random() < 0.8) {
+                    symbol = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                } else {
+                    symbol = hearts[Math.floor(Math.random() * hearts.length)];
+                }
+                
+                element.textContent = symbol;
+                
+                // 随机大小
+                const size = Math.random() * 1.5 + 1;
+                element.style.fontSize = `${size}rem`;
+                
+                // 随机位置
+                element.style.left = `${Math.random() * 100}%`;
+                
+                // 随机颜色（爱心有颜色，雪花为白色）
+                if (hearts.includes(symbol)) {
+                    const colors = ['#ff6b6b', '#ff9a9e', '#ffd1ff', '#ffafcc', '#ffb3c6'];
+                    element.style.color = colors[Math.floor(Math.random() * colors.length)];
+                } else {
+                    element.style.color = 'white';
+                }
+                
+                // 随机动画延迟和持续时间
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+                element.style.animationDelay = `${delay}s`;
+                element.style.animationDuration = `${duration}s`;
+                
+                document.body.appendChild(element);
+            }
+        }
+        
+        // 创建按钮点击雪花效果
+        function setupButtonEffects() {
+            const buttons = document.querySelectorAll('.glow-btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // 创建多个小白点
+                    for (let i = 0; i < 12; i++) {
+                        const dot = document.createElement('div');
+                        dot.classList.add('snow-dots');
+                        
+                        // 随机位置和方向
+                        const angle = (i / 12) * Math.PI * 2;
+                        const distance = 50;
+                        const x = Math.cos(angle) * distance;
+                        const y = Math.sin(angle) * distance;
+                        
+                        dot.style.setProperty('--x', `${x}px`);
+                        dot.style.setProperty('--y', `${y}px`);
+                        
+                        // 随机大小
+                        const size = Math.random() * 6 + 4;
+                        dot.style.width = `${size}px`;
+                        dot.style.height = `${size}px`;
+                        
+                        // 添加到按钮
+                        this.appendChild(dot);
+                        
+                        // 动画结束后移除元素
+                        setTimeout(() => {
+                            dot.remove();
+                        }, 1000);
+                    }
+                });
+            });
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createFallingElements();
+            setupButtonEffects();
+        });
+    </script>
+</body>
+</html>
